@@ -1,0 +1,15 @@
+start zookeeper server : zkServer 
+(needed configuration)
+start kafka server : 
+(needed configuration)
+
+python priceIndexToKafkaRealtime.py
+
+spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 sparkStreamKafka.py localhost 9200 localhost:9092 bitcoin-realtime
+
+
+ssh -F .\environments_setup\ssh\ansible.config -i ..\..\TestProjet\ansible Prod
+
+scp -F .\environments_setup\ssh\ansible.config -i ..\..\TestProjet\ansible ..\..\TestProjet\sparkStreamKafka.py Prod:~/project/sparkStreamKafka.py
+
+scp -F .\environments_setup\ssh\ansible.config -i ..\..\TestProjet\ansible ..\..\TestProjet\priceIndexToKafkaRealtime.py Prod:~/project/priceIndexToKafkaRealtime.py
