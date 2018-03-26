@@ -1,0 +1,10 @@
+To do:
+
+Offset management kafka
+test script
+update data : historical per day, and failure management
+			  real time (offset), and dump data from data older than 1 day
+travis.yml/playbook for integration
+	packages install
+	run script
+
