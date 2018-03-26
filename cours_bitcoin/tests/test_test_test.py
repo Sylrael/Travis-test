@@ -4,7 +4,7 @@ def test_name_function():
 	sample_input
 	expected_res
 	assert name_function(sample_input) == expected_res'''
-from cours_bitcoin.scripts.simple_add import add
+from cours_bitcoin.src.simple_add import add
 
 def test_initialize():
 	assert(True)
