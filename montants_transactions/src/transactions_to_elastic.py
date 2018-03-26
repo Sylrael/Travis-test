@@ -1,7 +1,7 @@
 import requests
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
-from datetime import date
+from datetime import date, timedelta
 import datetime
 import time
 import json
@@ -65,13 +65,14 @@ def connect_add_elastic(data):
 	helpers.bulk(es, get_transactions_from_block(data))
 
 def convert_date_in_ms(date):
-	timestamp = int(time.mktime(datetime.datetime.strptime(date, "%Y-%m-%d").timetuple()))
+	timestamp = int(time.mktime(date.timetuple()))
 	date_in_ms = timestamp*1000
 	return date_in_ms
 
 def main():
 	date_search = '2017-01-01'
-	res_blocks = get_blocks_for_day(convert_date_in_ms(date_search))
+	formatted_date_search = datetime.datetime.strptime(date, "%Y-%m-%d").date
+	res_blocks = get_blocks_for_day(convert_date_in_ms(formatted_date_search))
 	data_blocks = res_blocks.json()
 	for i in range(len(data_blocks["blocks"])):
 		res = get_single_block(data_blocks["blocks"][i]['hash'])

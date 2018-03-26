@@ -4,7 +4,7 @@ from cours_bitcoin.src.historique_to_elastic import get_historique_data
 
 class HistoriqueTests(unittest.TestCase):
 
-	def test_request_response(self):
+	def test_get_historique_data(self):
 		mock_get_patcher = patch('cours_bitcoin.src.historique_to_elastic.requests.get')
 		expected_data = [{'bpi': {'2011-01-01': 0.2243, '2011-01-02': 0.2243}, 'disclaimer': 'This data was produced from the CoinDesk Bitcoin Price Index. BPI value data returned as EUR.', 'time': {'updated': 'Jan 3, 2011 00:03:00 UTC', 'updatedISO': '2011-01-03T00:03:00+00:00'}}]
 		
