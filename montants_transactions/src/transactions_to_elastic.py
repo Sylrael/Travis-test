@@ -65,19 +65,26 @@ def connect_add_elastic(data):
 	helpers.bulk(es, get_transactions_from_block(data))
 
 def convert_date_in_ms(date):
+	#timestamp = int(time.mktime(datetime.datetime.strptime(date, "%Y-%m-%d").timetuple()))
 	timestamp = int(time.mktime(date.timetuple()))
 	date_in_ms = timestamp*1000
 	return date_in_ms
 
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days)):
+        yield start_date + timedelta(n)	
+	
 def main():
-	date_search = '2017-01-01'
-	formatted_date_search = datetime.datetime.strptime(date, "%Y-%m-%d").date
-	res_blocks = get_blocks_for_day(convert_date_in_ms(formatted_date_search))
-	data_blocks = res_blocks.json()
-	for i in range(len(data_blocks["blocks"])):
-		res = get_single_block(data_blocks["blocks"][i]['hash'])
-		data = res.json()
-		connect_add_elastic(data)
+	date_search = datetime.datetime.strptime('2018-03-25', "%Y-%m-%d").date()
+	start_date = datetime.datetime.strptime('2018-01-01', "%Y-%m-%d").date()
+	end_date = datetime.datetime.strptime('2018-02-01', "%Y-%m-%d").date()
+	for single_date in daterange(start_date, end_date):
+		res_blocks = get_blocks_for_day(convert_date_in_ms(single_date))
+		data_blocks = res_blocks.json()
+		for i in range(len(data_blocks["blocks"])):
+			res = get_single_block(data_blocks["blocks"][i]['hash'])
+			data = res.json()
+			connect_add_elastic(data)
 
 if __name__ == '__main__':
 	main()
