@@ -25,7 +25,7 @@ if (len(sys.argv) >= 4):
 def get_single_block(block_id):
 	url_block = 'https://blockchain.info/rawblock/'+str(block_id)
 	res_block = requests.get(url_block)
-	if res_block.ok:
+	if res_block.status_code == 200:
 		return res_block
 	else:
 		return None	
@@ -67,7 +67,7 @@ def connect_add_elastic(data):
 def convert_date_in_ms(date):
 	#timestamp = int(time.mktime(datetime.datetime.strptime(date, "%Y-%m-%d").timetuple()))
 	timestamp = int(time.mktime(date.timetuple()))
-	date_in_ms = timestamp*1000
+	date_in_ms = (timestamp+3600)*1000
 	return date_in_ms
 
 def daterange(start_date, end_date):
@@ -77,14 +77,15 @@ def daterange(start_date, end_date):
 def main():
 	date_search = datetime.datetime.strptime('2018-03-25', "%Y-%m-%d").date()
 	start_date = datetime.datetime.strptime('2018-01-01', "%Y-%m-%d").date()
-	end_date = datetime.datetime.strptime('2018-02-01', "%Y-%m-%d").date()
+	end_date = datetime.datetime.strptime('2018-03-20', "%Y-%m-%d").date()
 	for single_date in daterange(start_date, end_date):
 		res_blocks = get_blocks_for_day(convert_date_in_ms(single_date))
 		data_blocks = res_blocks.json()
 		for i in range(len(data_blocks["blocks"])):
 			res = get_single_block(data_blocks["blocks"][i]['hash'])
-			data = res.json()
-			connect_add_elastic(data)
+			if (res != None):
+				data = res.json()
+				connect_add_elastic(data)
 
 if __name__ == '__main__':
 	main()
