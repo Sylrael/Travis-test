@@ -1,4 +1,4 @@
-# Travis-test
+# Projet Big Data : Bitcoin
 
 ## User Story 1 : Cours du Bitcoin
 
@@ -38,3 +38,8 @@
 #### Annexes
 
 #### Spécifications
+Packages python:
+- requests
+- spark
+- kafka
+- elasticsearch
