@@ -34,6 +34,7 @@
 ### Machine Learning
 - MLlib Spark
 - Naive Bayes
+- Bag of words
 
 #### Annexes
 
@@ -43,3 +44,9 @@ Packages python:
 - spark
 - kafka
 - elasticsearch
+
+#### Notes
+- Elastic Search : host, port, données : date, rate
+- Kafka : broker, topic, offset management
+- Machine Learning : nltk, nltk.download('corpus'), nltk.download()
+- Kibana : import/export, configuration : restreindre accès aux options : barre de recherche, filtre date, onglets
