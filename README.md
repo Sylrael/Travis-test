@@ -50,3 +50,6 @@ Packages python:
 - Kafka : broker, topic, offset management
 - Machine Learning : nltk, nltk.download('corpus'), nltk.download()
 - Kibana : import/export, configuration : restreindre accès aux options : barre de recherche, filtre date, onglets
+
+- Travis : add java language (pb : build jar, copy file)
+- Ansible : playbook (run scripts and jar)
