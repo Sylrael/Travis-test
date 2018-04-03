@@ -1,0 +1,24 @@
+Machine learning algorith
+
+Data
+
+X = [[Xi]]
+Xi = bag of words from articles for a day
+Y = [Yi]
+Yi = Up, Down for a day
+
+P = [X]
+X = bag of words
+Y = predicted result (up/down)
+
+Model : Decision Tree ?
+
+Data retrieving
+	Headlines, descriptions, full articles
+Data formatting/Feature extraction
+	Bag of words, binary, count, tf-idf
+Model choice
+	
+Training model
+Test model
+Validation/Exportation

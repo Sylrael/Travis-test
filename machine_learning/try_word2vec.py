@@ -8,7 +8,7 @@ spark = SparkSession \
     .config("master", "local[2]") \
     .getOrCreate()
 
-#Word2Vec
+'''#Word2Vec
 # Input data: Each row is a bag of words from a sentence or document.
 documentDF = spark.createDataFrame([
     ("Hi I heard about Spark".split(" "), ),
@@ -23,4 +23,21 @@ model = word2Vec.fit(documentDF)
 result = model.transform(documentDF)
 for row in result.collect():
     text, vector = row
-    print("Text: [%s] => \nVector: %s\n" % (", ".join(text), str(vector)))
+    print("Text: [%s] => \nVector: %s\n" % (", ".join(text), str(vector)))'''
+
+	
+# CountVectorizer
+
+# Input data: Each row is a bag of words with a ID.
+df = spark.createDataFrame([
+    (0, "a b c".split(" ")),
+    (1, "a b b c a".split(" "))
+], ["id", "words"])
+
+# fit a CountVectorizerModel from the corpus.
+cv = CountVectorizer(inputCol="words", outputCol="features", vocabSize=3, minDF=2.0)
+
+model = cv.fit(df)
+
+result = model.transform(df)
+result.show(truncate=False)

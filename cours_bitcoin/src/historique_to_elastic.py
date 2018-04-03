@@ -32,8 +32,9 @@ def add_elastic(data):
 		date_event = datetime.datetime.strptime(i, "%Y-%m-%d").date()
 		value_event = data["bpi"][i]
 		yield {
-			'_index' : 'cours_btc_idx',
-			'_type': 'cours_btc',
+			'_index' : 'cours_btc_idx_test',
+			'_type': 'cours_btc_test',
+			'_id': date_event,
 			'_source': {
 				'date': date_event,
 				'rate': value_event,
