@@ -4,13 +4,16 @@ from datetime import date
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense
-from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import math
 
 model_path = 'C:/Users/diginamic/Desktop/Travis-test/machine_learning/model'
+currency = 'EUR'
+date_start = '2010-07-17'
+date_end = str(datetime.date.today())
 
 # Retrieve data from CoinDesk API
 def get_historique_data(currency, start_date, end_date):	
@@ -48,6 +51,7 @@ def main():
 	# plt.show()
 	
 	dataset = np.asarray(dataset_raw).reshape(-1,1)
+	
 	scaler = MinMaxScaler(feature_range=(0,1))
 	dataset = scaler.fit_transform(dataset)
 
